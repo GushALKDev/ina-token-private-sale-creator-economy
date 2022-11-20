@@ -30,8 +30,8 @@ contract INANIToken is ERC20, Ownable {
 
     // USDT & ETH contract addresses
     // Remember to allow this contract as spender for these token´s user
-    address constant USDT_CONTRACT = 0xe4Cc6BDBc94680514a4dd08e2b5674CD3b9233A5;
-    address constant ETH_CONTRACT = 0x69D44a9Cb0FbbeB5ab0629D1D738521a5af2b3d7;
+    address private USDTContract;
+    address private ETHContract;
 
     // Oracle addresses
     AggregatorV3Interface constant ETH_USD_ORACLE = AggregatorV3Interface(0x0715A7794a1dc8e42615F059dD6e406A6594651A);
@@ -54,6 +54,8 @@ contract INANIToken is ERC20, Ownable {
     mapping(address => bool) private blacklistedAddress;
 
     constructor(
+    address _USDTContract,
+    address _ETHContract,
     address _incentives,
     address _marketing,
     address _team,
@@ -64,6 +66,9 @@ contract INANIToken is ERC20, Ownable {
     ) ERC20("INANI Token", "INA") {
 
         INAContract = address(this);
+
+        USDTContract = _USDTContract;
+        ETHContract = _ETHContract;
 
         incentives = _incentives;
         marketing = _marketing;
@@ -108,7 +113,7 @@ contract INANIToken is ERC20, Ownable {
         // USDT deposit
         // Remember to set this contract as spender in the USDT contract, it is usually done
         // from the forntend.
-        IERC20(USDT_CONTRACT).safeTransferFrom(msg.sender, address(this), _amountUSDT);
+        IERC20(USDTContract).safeTransferFrom(msg.sender, address(this), _amountUSDT);
         // Amount of tokens to send
         uint256 amount = ((_amountUSDT * 10 ** decimals()) / presalePrice);
         // Presale conditions
@@ -123,7 +128,7 @@ contract INANIToken is ERC20, Ownable {
         // ETH deposit
         // Remember to set this contract as spender in the ETH contract, it is usually done
         // from the forntend.
-        IERC20(ETH_CONTRACT).safeTransferFrom(msg.sender, address(this), _amountETH);
+        IERC20(ETHContract).safeTransferFrom(msg.sender, address(this), _amountETH);
         // Value sent in USD
         uint256 sentUSDValue = getConversionRate(_amountETH, ETH_USD_ORACLE) / (10 ** decimals());
         // Amount of tokens to send
@@ -202,13 +207,13 @@ contract INANIToken is ERC20, Ownable {
     }
 
     function withdrawUSDT() public onlyOwner {
-        uint balance = IERC20(USDT_CONTRACT).balanceOf(address(this));
-        IERC20(USDT_CONTRACT).safeTransfer(owner(), balance);
+        uint balance = IERC20(USDTContract).balanceOf(address(this));
+        IERC20(USDTContract).safeTransfer(owner(), balance);
     }
 
     function withdrawETH() public onlyOwner {
-        uint balance = IERC20(ETH_CONTRACT).balanceOf(address(this));
-        IERC20(ETH_CONTRACT).safeTransfer(owner(), balance);
+        uint balance = IERC20(ETHContract).balanceOf(address(this));
+        IERC20(ETHContract).safeTransfer(owner(), balance);
     }
 
     ////////////////////////
@@ -236,11 +241,11 @@ contract INANIToken is ERC20, Ownable {
     }
 
     function getUSDTBalance() public view returns(uint256) {
-        return IERC20(USDT_CONTRACT).balanceOf(INAContract);
+        return IERC20(USDTContract).balanceOf(INAContract);
     }
 
     function getETHBalance() public view returns(uint256) {
-        return IERC20(ETH_CONTRACT).balanceOf(INAContract);
+        return IERC20(ETHContract).balanceOf(INAContract);
     }
 
     function getPrivateSaleAddressToAmount(address _address) public view returns(uint256) {
