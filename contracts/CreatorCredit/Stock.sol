@@ -109,7 +109,7 @@ contract Stock is ERC20, Ownable {
     function sellTokens(uint256 _amountTokens) public {
         require(_amountTokens > 0, "You cannot sell 0 tokens");
         // Remember to set this contract as spender in this contract, it is usually done
-        // from the forntend.
+        // from the frontend.
         // Deposit Tokens to get back INAs
         _transfer(msg.sender, address(this), _amountTokens);
         // Calculate how many INAs this amount if tokens worth.

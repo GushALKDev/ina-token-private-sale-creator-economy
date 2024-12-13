@@ -1,0 +1,13 @@
+{
+    "name": "Video 2",
+    "author": "User 2",
+    "authorID": "01",
+    "description": "Video demo 2",
+    "video": "https://videourl.com?videoid=2",
+    "attributes": [
+      { "trait_type": "category", "value": "tech"},
+      { "trait_type": "subcategory", "value": "oracles"}
+    ]
+  }
+
+  

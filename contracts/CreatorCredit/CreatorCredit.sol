@@ -17,7 +17,7 @@ contract CreatorCredit is Ownable {
 
     // Score
     // The score should be computed offchain due to cost optimization, and requested via Oracle on every transaction
-    // that implies his use. For this assesment I will modify the mapping manually to change the scores but I will leave
+    // that implies its use. For this assesment I will modify the mapping manually to change the scores but I will leave
     // the oracle calls commented.
     mapping(uint256 => uint256) private userIdToContentCreatorScore;
     mapping(uint256 => address) private userIdToUserAddress;

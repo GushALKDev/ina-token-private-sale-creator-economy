@@ -1,0 +1,13 @@
+{
+    "name": "Video 3",
+    "author": "User 3",
+    "authorID": "02",
+    "description": "Video demo 3",
+    "video": "https://videourl.com?videoid=3",
+    "attributes": [
+      { "trait_type": "category", "value": "tech"},
+      { "trait_type": "subcategory", "value": "tokenomics"}
+    ]
+  }
+
+  

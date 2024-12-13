@@ -1,0 +1,11 @@
+{
+    "name": "Video 1",
+    "author": "User 1",
+    "authorID": "01",
+    "description": "Video demo 1",
+    "video": "https://videourl.com?videoid=1",
+    "attributes": [
+      { "trait_type": "category", "value": "tech"},
+      { "trait_type": "subcategory", "value": "blockchain"}
+    ]
+  }
