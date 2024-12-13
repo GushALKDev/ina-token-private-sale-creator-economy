@@ -1,4 +1,4 @@
-# README
+# INA Token Private Sale & Content Creator Economy
 
 ## Introduction
 
